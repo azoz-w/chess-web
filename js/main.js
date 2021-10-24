@@ -358,7 +358,7 @@ function getBestMove(game, color, currSum) {
   positionCount = 0;
 
   if (color === 'b') {
-    var depth = parseInt($('#search-depth').find(':selected').text());
+    var depth = parseInt($('#search-depth').find(':selected').val());
   } else {
     var depth = parseInt($('#search-depth-white').find(':selected').text());
   }
