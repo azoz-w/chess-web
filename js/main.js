@@ -27,8 +27,6 @@ board = Chessboard('myBoard', config);
 
 timer = null;
 
-
-
 var weights = { p: 100, n: 280, b: 320, r: 479, q: 929, k: 60000, k_e: 60000 };
 var pst_w = {
   p: [
@@ -393,42 +391,7 @@ function reset() {
 }
 
 
-$('#ruyLopezBtn').on('click', function () {
-  reset();
-  game.load(
-    'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1'
-  );
-  board.position(game.fen());
-  window.setTimeout(function () {
-    makeBestMove('b');
-  }, 250);
-});
-$('#italianGameBtn').on('click', function () {
-  reset();
-  game.load(
-    'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1'
-  );
-  board.position(game.fen());
-  window.setTimeout(function () {
-    makeBestMove('b');
-  }, 250);
-});
-$('#sicilianDefenseBtn').on('click', function () {
-  reset();
-  game.load('rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1');
-  board.position(game.fen());
-});
-$('#startBtn').on('click', function () {
-  reset();
-});
 
-$('#compVsCompBtn').on('click', function () {
-  reset();
-  compVsComp('w');
-});
-$('#resetBtn').on('click', function () {
-  reset();
-});
 
 var undo_stack = [];
 
@@ -441,45 +404,12 @@ function undo() {
   board.position(game.fen());
 }
 
-$('#undoBtn').on('click', function () {
-  if (game.history().length >= 2) {
-    $board.find('.' + squareClass).removeClass('highlight-white');
-    $board.find('.' + squareClass).removeClass('highlight-black');
-    $board.find('.' + squareClass).removeClass('highlight-hint');
-    undo();
-    window.setTimeout(function () {
-      undo();
-      window.setTimeout(function () {
-        showHint();
-      }, 250);
-    }, 250);
-  } else {
-    alert('Nothing to undo.');
-  }
-});
+
 
 function redo() {
   game.move(undo_stack.pop());
   board.position(game.fen());
 }
-
-$('#redoBtn').on('click', function () {
-  if (undo_stack.length >= 2) {
-    redo();
-    window.setTimeout(function () {
-      redo();
-      window.setTimeout(function () {
-        showHint();
-      }, 250);
-    }, 250);
-  } else {
-    alert('Nothing to redo.');
-  }
-});
-
-$('#showHint').change(function () {
-  window.setTimeout(showHint, 250);
-});
 
 function showHint() {
   var showHint = document.getElementById('showHint');
