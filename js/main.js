@@ -1,16 +1,11 @@
-/*
- * A simple chess AI, by someone who doesn't know how to play chess.
- * Uses the chessboard.js and chess.js libraries.
- *
- * Copyright (c) 2020 Zhang Zeyu
- */
+
 
 var STACK_SIZE = 100; // maximum size of undo stack
 
 var board = null;
 var $board = $('#myBoard');
 var game = new Chess();
-var globalSum = 0; // always from black's perspective. Negative for white's perspective.
+var globalSum = 0;
 var whiteSquareGrey = '#a9a9a9';
 var blackSquareGrey = '#696969';
 
@@ -32,10 +27,7 @@ board = Chessboard('myBoard', config);
 
 timer = null;
 
-/*
- * Piece Square Tables, adapted from Sunfish.py:
- * https://github.com/thomasahle/sunfish/blob/master/sunfish.py
- */
+
 
 var weights = { p: 100, n: 280, b: 320, r: 479, q: 929, k: 60000, k_e: 60000 };
 var pst_w = {
@@ -100,7 +92,7 @@ var pst_w = {
     [17, 30, -3, -14, 6, -1, 40, 18],
   ],
 
-  // Endgame King Table
+
   k_e: [
     [-50, -40, -30, -20, -20, -30, -40, -50],
     [-30, -20, -10, 0, 0, -10, -20, -30],
@@ -121,44 +113,32 @@ var pst_b = {
   k: pst_w['k'].slice().reverse(),
   k_e: pst_w['k_e'].slice().reverse(),
 };
-
 var pstOpponent = { w: pst_b, b: pst_w };
 var pstSelf = { w: pst_w, b: pst_b };
 
-/*
- * Evaluates the board at this point in time,
- * using the material weights and piece square tables.
- */
 function evaluateBoard(game, move, prevSum, color) {
 
   if (game.in_checkmate()) {
-
-    // Opponent is in checkmate (good for us)
     if (move.color === color) {
       return 10 ** 10;
     }
-    // Our king's in checkmate (bad for us)
     else {
       return -(10 ** 10);
     }
   }
-
-  if (game.in_draw() || game.in_threefold_repetition() || game.in_stalemate())
-  {
+  if (game.in_draw() || game.in_threefold_repetition() || game.in_stalemate()) {
     return 0;
   }
-
   if (game.in_check()) {
-    // Opponent is in check (good for us)
+
     if (move.color === color) {
       prevSum += 50;
     }
-    // Our king's in check (bad for us)
+
     else {
       prevSum -= 50;
     }
   }
-
   var from = [
     8 - parseInt(move.from[1]),
     move.from.charCodeAt(0) - 'a'.charCodeAt(0),
@@ -167,26 +147,20 @@ function evaluateBoard(game, move, prevSum, color) {
     8 - parseInt(move.to[1]),
     move.to.charCodeAt(0) - 'a'.charCodeAt(0),
   ];
-
-  // Change endgame behavior for kings
   if (prevSum < -1500) {
     if (move.piece === 'k') {
       move.piece = 'k_e';
     }
-    // Kings can never be captured
-    // else if (move.captured === 'k') {
-    //   move.captured = 'k_e';
-    // }
+
   }
 
   if ('captured' in move) {
-    // Opponent piece was captured (good for us)
+
     if (move.color === color) {
       prevSum +=
         weights[move.captured] +
         pstOpponent[move.color][move.captured][to[0]][to[1]];
     }
-    // Our piece was captured (bad for us)
     else {
       prevSum -=
         weights[move.captured] +
@@ -195,10 +169,7 @@ function evaluateBoard(game, move, prevSum, color) {
   }
 
   if (move.flags.includes('p')) {
-    // NOTE: promote to queen for simplicity
     move.promotion = 'q';
-
-    // Our piece was promoted (good for us)
     if (move.color === color) {
       prevSum -=
         weights[move.piece] + pstSelf[move.color][move.piece][from[0]][from[1]];
@@ -206,7 +177,7 @@ function evaluateBoard(game, move, prevSum, color) {
         weights[move.promotion] +
         pstSelf[move.color][move.promotion][to[0]][to[1]];
     }
-    // Opponent piece was promoted (bad for us)
+
     else {
       prevSum +=
         weights[move.piece] + pstSelf[move.color][move.piece][from[0]][from[1]];
@@ -215,7 +186,7 @@ function evaluateBoard(game, move, prevSum, color) {
         pstSelf[move.color][move.promotion][to[0]][to[1]];
     }
   } else {
-    // The moved piece still exists on the updated board, so we only need to update the position value
+
     if (move.color !== color) {
       prevSum += pstSelf[move.color][move.piece][from[0]][from[1]];
       prevSum -= pstSelf[move.color][move.piece][to[0]][to[1]];
@@ -224,50 +195,28 @@ function evaluateBoard(game, move, prevSum, color) {
       prevSum += pstSelf[move.color][move.piece][to[0]][to[1]];
     }
   }
-
   return prevSum;
 }
 
-/*
- * Performs the minimax algorithm to choose the best move: https://en.wikipedia.org/wiki/Minimax (pseudocode provided)
- * Recursively explores all possible moves up to a given depth, and evaluates the game board at the leaves.
- *
- * Basic idea: maximize the minimum value of the position resulting from the opponent's possible following moves.
- * Optimization: alpha-beta pruning: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning (pseudocode provided)
- *
- * Inputs:
- *  - game:                 the game object.
- *  - depth:                the depth of the recursive tree of all possible moves (i.e. height limit).
- *  - isMaximizingPlayer:   true if the current layer is maximizing, false otherwise.
- *  - sum:                  the sum (evaluation) so far at the current layer.
- *  - color:                the color of the current player.
- *
- * Output:
- *  the best move at the root of the current subtree.
- */
 function minimax(game, depth, alpha, beta, isMaximizingPlayer, sum, color) {
   positionCount++;
   var children = game.ugly_moves({ verbose: true });
-
-  // Sort moves randomly, so the same move isn't always picked on ties
   children.sort(function (a, b) {
     return 0.5 - Math.random();
   });
 
   var currMove;
-  // Maximum depth exceeded or node is a terminal node (no children)
+
   if (depth === 0 || children.length === 0) {
     return [null, sum];
   }
-
-  // Find maximum/minimum from list of 'children' (possible moves)
   var maxValue = Number.NEGATIVE_INFINITY;
   var minValue = Number.POSITIVE_INFINITY;
   var bestMove;
   for (var i = 0; i < children.length; i++) {
     currMove = children[i];
 
-    // Note: in our case, the 'children' are simply modified game states
+
     var currPrettyMove = game.ugly_move(currMove);
     var newSum = evaluateBoard(game, currPrettyMove, sum, color);
     var [childBestMove, childValue] = minimax(
@@ -279,9 +228,7 @@ function minimax(game, depth, alpha, beta, isMaximizingPlayer, sum, color) {
       newSum,
       color
     );
-
     game.undo();
-
     if (isMaximizingPlayer) {
       if (childValue > maxValue) {
         maxValue = childValue;
@@ -299,8 +246,6 @@ function minimax(game, depth, alpha, beta, isMaximizingPlayer, sum, color) {
         beta = childValue;
       }
     }
-
-    // Alpha-beta pruning
     if (alpha >= beta) {
       break;
     }
@@ -315,10 +260,10 @@ function minimax(game, depth, alpha, beta, isMaximizingPlayer, sum, color) {
 
 function checkStatus(color) {
   if (game.in_checkmate()) {
-    if (globalSum > 0){
+    if (globalSum > 0) {
       $('#status').html(`<b>Checkmate!</b> Oops, <b>White</b> lost.`);
     }
-    else 
+    else
       $('#status').html(`<b>Checkmate!</b> Oops, <b>Black</b> lost.`);
   } else if (game.insufficient_material()) {
     $('#status').html(`It's a <b>draw!</b> (Insufficient Material)`);
@@ -329,15 +274,15 @@ function checkStatus(color) {
   } else if (game.in_draw()) {
     $('#status').html(`It's a <b>draw!</b> (50-move Rule)`);
   } else if (game.in_check()) {
-    if (globalSum > 0){
+    if (globalSum > 0) {
       $('#status').html(`Oops, <b>white</b> is in <b>check!</b>`);
-    return false;
+      return false;
     }
     else {
       $('#status').html(`Oops, <b>Black</b> is in <b>check!</b>`);
       return false;
     }
-    
+
   } else {
     $('#status').html(`No check, checkmate, or draw.`);
     return false;
@@ -362,14 +307,13 @@ function updateAdvantage() {
   });
 }
 
-/*
- * Calculates the best legal move for the given color.
- */
+
 function getBestMove(game, color, currSum) {
   positionCount = 0;
 
   if (color === 'b') {
     var depth = parseInt($('#search-depth').find(':selected').val());
+    document.getElementById('ShowDepth').innerHTML="the depth is set to: "+depth;
   } else {
     var depth = parseInt($('#search-depth-white').find(':selected').text());
   }
@@ -395,38 +339,29 @@ function getBestMove(game, color, currSum) {
   return [bestMove, bestMoveValue];
 }
 
-/*
- * Makes the best legal move for the given color.
- */
+
 function makeBestMove(color) {
   if (color === 'b') {
     var move = getBestMove(game, color, globalSum)[0];
   } else {
     var move = getBestMove(game, color, -globalSum)[0];
   }
-
   globalSum = evaluateBoard(game, move, globalSum, 'b');
   updateAdvantage();
-
   game.move(move);
   board.position(game.fen());
 
   if (color === 'b') {
     checkStatus('black');
-
-    // Highlight black move
     $board.find('.' + squareClass).removeClass('highlight-black');
     $board.find('.square-' + move.from).addClass('highlight-black');
     squareToHighlight = move.to;
     colorToHighlight = 'black';
-
     $board
       .find('.square-' + squareToHighlight)
       .addClass('highlight-' + colorToHighlight);
   } else {
     checkStatus('white');
-
-    // Highlight white move
     $board.find('.' + squareClass).removeClass('highlight-white');
     $board.find('.square-' + move.from).addClass('highlight-white');
     squareToHighlight = move.to;
@@ -438,26 +373,10 @@ function makeBestMove(color) {
   }
 }
 
-/*
- * Plays Computer vs. Computer, starting with a given color.
- */
-function compVsComp(color) {
-  if (!checkStatus({ w: 'white', b: 'black' }[color])) {
-    timer = window.setTimeout(function () {
-      makeBestMove(color);
-      if (color === 'w') {
-        color = 'b';
-      } else {
-        color = 'w';
-      }
-      compVsComp(color);
-    }, 250);
-  }
-}
 
-/*
- * Resets the game to its initial state.
- */
+
+
+
 function reset() {
   game.reset();
   globalSum = 0;
@@ -467,17 +386,13 @@ function reset() {
   board.position(game.fen());
   $('#advantageColor').text('Neither side');
   $('#advantageNumber').text(globalSum);
-
-  // Kill the Computer vs. Computer callback
   if (timer) {
     clearTimeout(timer);
     timer = null;
   }
 }
 
-/*
- * Event listeners for various buttons.
- */
+
 $('#ruyLopezBtn').on('click', function () {
   reset();
   game.load(
@@ -520,8 +435,6 @@ var undo_stack = [];
 function undo() {
   var move = game.undo();
   undo_stack.push(move);
-
-  // Maintain a maximum stack size
   if (undo_stack.length > STACK_SIZE) {
     undo_stack.shift();
   }
@@ -533,8 +446,6 @@ $('#undoBtn').on('click', function () {
     $board.find('.' + squareClass).removeClass('highlight-white');
     $board.find('.' + squareClass).removeClass('highlight-black');
     $board.find('.' + squareClass).removeClass('highlight-hint');
-
-    // Undo twice: Opponent's latest move, followed by player's latest move
     undo();
     window.setTimeout(function () {
       undo();
@@ -554,7 +465,6 @@ function redo() {
 
 $('#redoBtn').on('click', function () {
   if (undo_stack.length >= 2) {
-    // Redo twice: Player's last move, followed by opponent's last move
     redo();
     window.setTimeout(function () {
       redo();
@@ -574,8 +484,6 @@ $('#showHint').change(function () {
 function showHint() {
   var showHint = document.getElementById('showHint');
   $board.find('.' + squareClass).removeClass('highlight-hint');
-
-  // Show hint (best move for white)
   if (showHint.checked) {
     var move = getBestMove(game, 'w', -globalSum)[0];
 
@@ -584,10 +492,7 @@ function showHint() {
   }
 }
 
-/*
- * The remaining code is adapted from chessboard.js examples #5000 through #5005:
- * https://chessboardjs.com/examples#5000
- */
+
 function removeGreySquares() {
   $('#myBoard .square-55d63').css('background', '');
 }
@@ -599,15 +504,13 @@ function greySquare(square) {
   if ($square.hasClass('black-3c85d')) {
     background = blackSquareGrey;
   }
-
   $square.css('background', background);
 }
 
 function onDragStart(source, piece) {
-  // do not pick up pieces if the game is over
+
   if (game.game_over()) return false;
 
-  // or if it's not that side's turn
   if (
     (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
     (game.turn() === 'b' && piece.search(/^w/) !== -1)
@@ -620,20 +523,13 @@ function onDrop(source, target) {
   undo_stack = [];
   removeGreySquares();
 
-  // see if the move is legal
-  var move = game.move({
-    from: source,
-    to: target,
-    promotion: 'q', // NOTE: always promote to a queen for example simplicity
-  });
+  var move = game.move({ from: source, to: target, promotion: 'q', });
 
-  // Illegal move
   if (move === null) return 'snapback';
 
   globalSum = evaluateBoard(game, move, globalSum, 'b');
   updateAdvantage();
 
-  // Highlight latest move
   $board.find('.' + squareClass).removeClass('highlight-white');
 
   $board.find('.square-' + move.from).addClass('highlight-white');
@@ -646,7 +542,6 @@ function onDrop(source, target) {
 
   if (!checkStatus('black'));
   {
-    // Make the best move for black
     window.setTimeout(function () {
       makeBestMove('b');
       window.setTimeout(function () {
@@ -657,28 +552,18 @@ function onDrop(source, target) {
 }
 
 function onMouseoverSquare(square, piece) {
-  // get list of possible moves for this square
-  var moves = game.moves({
-    square: square,
-    verbose: true,
-  });
 
-  // exit if there are no moves available for this square
+  var moves = game.moves({ square: square, verbose: true, });
   if (moves.length === 0) return;
 
-  // highlight the square they moused over
   greySquare(square);
-
-  // highlight the possible squares for this piece
   for (var i = 0; i < moves.length; i++) {
     greySquare(moves[i].to);
   }
 }
-
 function onMouseoutSquare(square, piece) {
   removeGreySquares();
 }
-
 function onSnapEnd() {
   board.position(game.fen());
 }
