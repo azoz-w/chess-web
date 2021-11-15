@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['player'])) {
+  header('location:http://localhost/Recommender-System/pages/Login.php ?error=you have to login first');
+}
+
+?>
 <html lang="en">
 
 <head>
@@ -100,9 +107,9 @@
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="rule.html">RULES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="guide.html">GUIDE</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signin.html">Log out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="rule.php">RULES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guide.php">GUIDE</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php">Log out</a></li>
                 </ul>
             </div>
         </div>

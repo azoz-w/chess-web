@@ -11,10 +11,8 @@
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styleslanding.css" rel="stylesheet" />
 
@@ -58,14 +56,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container px-5">
             <a class="navbar-brand" href="landing.html">CHESSLY</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                    class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="rule.html">RULES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="guide.html">GUIDE</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Registration.html">SIGN UP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="rule.php">RULES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guide.php">GUIDE</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signin.php">Log In</a></li>
                 </ul>
             </div>
         </div>
@@ -83,30 +79,40 @@
                                 <h2 class="text-uppercase text-center mb-5" style="color: #676767;">Create an account
                                 </h2>
 
-                                <form>
+                                <form action="checkRegistration.php" method="POST">
+                                    <?php
+
+                                    if (isset($_GET['error'])) {
+                                        echo "<div class='alert alert-danger' role='alert' style='text-align:center;'>" . $_GET['error'] . " !</div>";
+                                        
+                                    }
+                                    if (isset($_GET['succes'])) {
+                                        echo "<div class='alert alert-danger' role='alert' style='text-align:center;'>" . $_GET['error'] . " !</div>";
+                                    }
+                                    ?>
+                                
+                                    <!--<div class="form-outline mb-4">
+                                        <input type="text" id="username" class="form-control form-control-lg" name="username"required />
+                                        <label class="form-label" for="form3Example1cg" style="color: #676767;">Username</label>
+                                    </div>-->
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example3cg"
-                                            style="color: #676767;">Email</label>
+                                        <input type="email" id="email" class="form-control form-control-lg"name="email" required />
+                                        <label class="form-label" for="form3Example3cg" style="color: #676767;">Email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="form3Example4cg"
-                                            class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example4cg"
-                                            style="color: #676767;">Password</label>
+                                        <input type="password" id="psw" class="form-control form-control-lg" name="psw"required />
+                                        <label class="form-label" for="form3Example4cg" style="color: #676767;">Password</label>
                                     </div>
 
 
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="button"
-                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">LOGIN</button>
+                                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                     </div>
 
-                                    <p class="text-center text-muted mt-5 mb-0">Don't Have an account? <a href="Registration.html"
-                                            class="fw-bold text-body"><u>Register here</u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="signin.php" class="fw-bold text-body"><u>Login here</u></a></p>
 
                                 </form>
 
@@ -122,7 +128,7 @@
 
 
     <!-- Footer-->
-    
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

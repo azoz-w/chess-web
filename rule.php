@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
 
+?>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -37,10 +40,17 @@
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="rule.html">RULES</a></li>
-                    
-                    <li class="nav-item"><a class="nav-link" href="Registration.html">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signin.html">Log In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guide.php">GUIDE</a></li>
+                    <?php
+                    if(isset($_SESSION['player'])){
+                    echo '<li class="nav-item"><a class="nav-link" href="chessboard.php">Chessboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php">signout</a></li>';
+    }
+                    else{
+                        echo '<li class="nav-item"><a class="nav-link" href="Registration.php">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signin.php">Log In</a></li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -50,8 +60,8 @@
         <div class="masthead-content">
             <div class="container px-5">
                
-                    <h1 class="masthead-heading mb-0" style="color: black;">Guide</h1>
-                    <h2 class="masthead-subheading mb-0" style="color: black;">WE'RE HERE TO GIVE YOU SOME SECRETS! SHH!</h2>
+                    <h1 class="masthead-heading mb-0" style="color: black;">RULES</h1>
+                    <h2 class="masthead-subheading mb-0" style="color: black;">WE'RE HERE TO HELP!</h2>
                     
                 
             </div>
