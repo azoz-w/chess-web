@@ -47,7 +47,6 @@ session_start();
                         <li class="nav-item"><a class="nav-link" href="signin.php">Log In</a></li>';
                     }
                     ?>
-                    
                 </ul>
             </div>
         </div>
