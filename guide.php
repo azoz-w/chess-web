@@ -70,14 +70,13 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." /></div>
+                    <div class="p-5"><img src="assets/ICON.png" style="width:300px;height:600px;" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">For those about to rock...</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Chess Openings Guide.</h2>
+                        <p>Provided below are some of the most famous openings in chess for you, use them to give you a better start and enhance your strategy, 
+                            there are many more openings and strategies than the ones provided below we encourage you to research and find the ones that suit you. </p>
                     </div>
                 </div>
             </div>
@@ -88,14 +87,17 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/02.jpg" alt="..." /></div>
+                    <div class="p-5"><img src="assets/Ruy Lopez.png" alt="..." /></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4">We salute you!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Ruy lopez</h2>
+                        <p>The starting position of the Ruy Lopez is reached after 1. e4 e5 2. Nf3 Nc6 3. Bb5.
+                            <br/><br/>
+                            the Ruy lopez is one of the most popular chess openings at all experience levels.
+                             many variations have been extensively studied, 
+                             and a wide variety of strategies are available to both White and Black.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -106,14 +108,82 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/03.jpg" alt="..." /></div>
+                    <div class="p-5"><img src="assets/Italian Game.png" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Let there be rock!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Italian Game</h2>
+                        <p>the Italian Game is reached by the moves 1. e4 e5 2. Nf3 Nc6 3. Bc4.
+                            <br/><br/>
+                            The Italian Game remained quite popular through the 19th century, 
+                            but today has been rplaced by the Ruy Lopez as White's favorite choice on the third move.
+                            <br/><br/>
+                            the Italian Game often leads to aggressive, 
+                            open positions which can be fun to play. This opening is still seen at all experience levels - and is quite popular among club players.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content section 4-->
+    <section>
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="p-5"><img src="assets/Sicilian Defence.png" alt="..." /></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <h2 class="display-4">Sicilian Defense</h2>
+                        <p>the Sicilian Defense is reached by the move 1. e4 c5
+                            <br/><br/>
+                            the Sicilian Defense is currently Black's most popular response to e4, especially at the highest levels of chess.
+                            <br/><br/>
+                            The Sicilian Defense typically leads to a complex and dangerous struggle where both sides can play for a win.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content section 5-->
+    <section id="scroll">
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><img src="assets/French Defence.png" alt="..." /></div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">French Defense</h2>
+                        <p>the French Defense is reached by the move 1. e4 e6</p>
+                        <br/><br/>
+                        The French Defense (1. e4 e6) concedes central space to White and limits the scope of his king's bishop, 
+                        but prevents tactics against f7 while allowing Black to have activity on the queenside and counterplay in the center.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content section 6-->
+    <section>
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="p-5"><img src="assets/Queen's Gambit.png" alt="..." /></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <h2 class="display-4">Queen's Gambit</h2>
+                        <p>Queen's Gambit is reached by the moves 1. d4 d5 2. c4.
+                            <br/><br/>
+                            The Queen's Gambit, marked by the moves 1. d4 d5 2. c4, is one of the oldest known chess openings. 
+                            This classical approach "offers" a pawn (in reality, 
+                            Black cannot expect to hold onto the pawn if he chooses to capture it) in exchange for a stronger center.
+                            <br/><br/>
+                            Black has several options, including the Queen's Gambit Accepted, the Queen's Gambit Declined, and the Slav Defense.
+                        </p>
                     </div>
                 </div>
             </div>
