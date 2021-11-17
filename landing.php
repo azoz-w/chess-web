@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en">
 
 <head>
@@ -31,7 +34,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container px-5">
-            <a class="navbar-brand" href="landing.html">CHESSLY</a>
+            <a class="navbar-brand" href="landing.php">CHESSLY</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
                     class="navbar-toggler-icon"></span></button>
@@ -39,8 +42,16 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="rule.php">RULES</a></li>
                     <li class="nav-item"><a class="nav-link" href="guide.php">GUIDE</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Registration.php">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signin.php">Log In</a></li>
+                    <?php
+                    if(isset($_SESSION['player'])){
+                    echo '<li class="nav-item"><a class="nav-link" href="chessboard.php">Chessboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php">signout</a></li>';
+    }
+                    else{
+                        echo '<li class="nav-item"><a class="nav-link" href="Registration.php">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signin.php">Log In</a></li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -53,7 +64,16 @@
                     <h1 class="masthead-heading mb-0" style="color: #000000;">CHESSLY</h1>
                     <h2 class="masthead-subheading mb-0" style="color: #000000;">ARE YOU BETTER THAN OUR AI?</h2>
                     <br><br><br>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="signin.php">sign in to play</a>
+                    <?php
+                    if(isset($_SESSION['player'])){
+                        echo '<a class="btn btn-primary btn-xl rounded-pill mt-5" href="chessboard.php">GO TO CHESSBOARD</a>';
+        }
+                        else{
+                            echo '<a class="btn btn-primary btn-xl rounded-pill mt-5" href="signin.php">SIGNIN TO PLAY</a>';
+                        }
+                    
+                    ?>
+                    
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             </div>
         </div>
