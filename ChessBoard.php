@@ -109,7 +109,7 @@ if (!isset($_SESSION['player'])) {
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="rule.php">RULES</a></li>
                     <li class="nav-item"><a class="nav-link" href="guide.php">GUIDE</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signout.php">Log out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php">SIGNOUT</a></li>
                 </ul>
             </div>
         </div>
