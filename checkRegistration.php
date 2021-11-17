@@ -25,7 +25,7 @@ if (mysqli_num_rows($resultQ) > 0) {
 
     if ($res == 1) {
         $_SESSION['player'] = $email;
-        header("Location:chessboard.php?message=you were successfully registered! sign in with your new account");
+        header("Location:chessboard.php?message=you were successfully registered!");
     } else {
         header("Location:http://localhost/chess-web/Registration.php? err= tests ");
     }
