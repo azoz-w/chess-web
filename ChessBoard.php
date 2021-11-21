@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['player'])) {
-  header('location:http://localhost/Recommender-System/pages/Login.php ?error=you have to login first');
+  header('location:http://localhost/chess-web/signin.php.php ?error=you have to login first');
 }
 
 ?>
