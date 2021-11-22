@@ -74,7 +74,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/king'sMoves.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/king'sMoves.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
@@ -96,7 +96,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/Queen'sMoves.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/Queen'sMoves.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
@@ -112,7 +112,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/Rock'sMoves.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/Rock'sMoves.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
@@ -128,7 +128,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/bishop'sMoves.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/bishop'sMoves.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
@@ -145,7 +145,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/Knight'sMoves.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/Knight'sMoves.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
@@ -161,7 +161,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/Pawn'sMoves.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/Pawn'sMoves.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
@@ -177,7 +177,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/CastleMove.jpg" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/CastleMove.jpg" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
@@ -202,7 +202,7 @@ session_start();
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="assets/Ckeck'sMove.jpg" alt="..." /></div>
+                        <div class="p-5"><img class="img-fluid " src="assets/Ckeck'sMove.jpg" alt="..." /></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="p-5">
@@ -225,7 +225,7 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/Checkmate'sMove.png" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid " src="assets/Checkmate'sMove.png" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
@@ -241,9 +241,9 @@ session_start();
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="assets/StaleMate'sMoves.png" alt="..." /></div>
+                    <div class="p-4"><img class="img-fluid " style="width: 480px;" src="assets/StaleMate'sMoves.png" alt="..." /></div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 ">
                     <div class="p-5">
                         <h2 class="display-4">Draw Rules</h2>
                         <p> There are three possible results in a chess game. If neither side wins, the game is a draw and both players get half a point. A draw is half as good as a win, but much better, than losing.<br>
