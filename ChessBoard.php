@@ -118,8 +118,8 @@ if (!isset($_SESSION['player'])) {
     <div class="container " >
         <div class="text-center mt-5">
             <main>
-                <div class="container my-3">
-                    <div class="row align-items-center">
+                <div class="container my-3" style="width:800px">
+                    <div class="row align-items-center ">
                         <div class="col-md-6 ">
                            <br><br><br>
                             
