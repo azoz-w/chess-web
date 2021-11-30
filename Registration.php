@@ -49,6 +49,7 @@
             background: linear-gradient(to right, rgba(103, 103, 103, 0.5), rgba(143, 211, 244, 0.5))
         }
     </style>
+    
 </head>
 
 <body id="page-top">

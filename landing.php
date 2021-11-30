@@ -28,6 +28,7 @@ session_start();
             background: url('assets/landing1.png');
         }
     </style>
+    
 </head>
 
 <body id="page-top">
