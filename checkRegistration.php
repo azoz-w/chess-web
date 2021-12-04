@@ -24,7 +24,8 @@ if (mysqli_num_rows($resultQ) > 0) {
     //$query = "INSERT INTO player VALUES('" $pass "','" $email ")";
 
     if ($res == 1) {
-        $_SESSION['player'] = $email;
+        $_SESSION['player'] = $email;  
+        $_SESSION['email'] = 0; 
         header("Location:chessboard.php?message=you were successfully registered!");
     } else {
         header("Location:http://localhost/chess-web/Registration.php? err= tests ");
@@ -32,3 +33,4 @@ if (mysqli_num_rows($resultQ) > 0) {
 }
 
 mysqli_close($con);
+?>

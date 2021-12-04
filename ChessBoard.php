@@ -359,9 +359,17 @@ if (!isset($_SESSION['player'])) {
                     modal.style.display = "none";
                 }
             }
+            
         </script>';
         }
     }
+    
+    if(($_SESSION['email'] === 0)){
+        echo " <script>fetch(`http://127.0.0.1:4000/send-welcome-email?to=". $_SESSION['player'] ."`) //query string url
+      .catch(err => console.error(err))</script>";
+      $_SESSION['email'] = 1;
+    }
+    
     ?>
     <!-- The Modal -->
 

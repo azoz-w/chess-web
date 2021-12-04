@@ -36,7 +36,10 @@
         "url": "https://github.com/StartBootstrap/startbootstrap-bare.git"
     },
     "dependencies": {
-        "bootstrap": "5.1.1"
+        "@sendgrid/mail": "^7.6.0",
+        "bootstrap": "5.1.1",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
     },
     "devDependencies": {
         "autoprefixer": "10.3.5",
