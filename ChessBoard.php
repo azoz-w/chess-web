@@ -310,7 +310,7 @@ if (!isset($_SESSION['player'])) {
     $query = "SELECT `newsletter` FROM `player` WHERE `email` = '" . $_SESSION['player'] . "'";
     $res = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($res)) {
-        if ($row['newsletter'] != 1) {
+        if ($row['newsletter'] == 0) {
             echo '<div id="myModal" class="modal">
 
             <!-- Modal content -->
@@ -330,6 +330,7 @@ if (!isset($_SESSION['player'])) {
                 <div class="modal-footer" style="padding-right: 18%;">
                 <a class="btn btn-primary btn-xl rounded-pill " href="addToNewsletter.php"
                 style="background: #676767;background: linear-gradient(to right, rgba(103, 103, 103, 0.5), rgba(143, 211, 244, 0.5))">Join our Newsletter!</a>
+                <a style="padding-right: 20%;" href="notAdd.php">no, don\'t ask again</a>
                 </div>
             </div>
         </div>
